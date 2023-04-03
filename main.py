@@ -1,13 +1,17 @@
 import pygame
 from pygame.locals import *
 import time
-from Python import main_pyqt
+from Python import input_status_button as button
 
 def main():
     # 設定
     pygame.init()
     sensitivity = 0.5 # ジョイスティック感度設定
-    font1 =pygame.font.SysFont("arial", 40) # フォント設定 
+    font1 =pygame.font.SysFont("arial", 20) # フォント設定 
+    text_top = 350
+    text_start1 = 20
+    text_start2 = 170
+    text_start3 = 320
 
     # ジョイスティックの初期化
     pygame.joystick.init()
@@ -44,7 +48,7 @@ def main():
     bHOMEon = font1.render("Button HOME ON", True, (0,0,0))
     bHOMEoff = font1.render("Button HOME OFF", True, (0,0,0))
     # +
-    bPLUSBon = font1.render("Button + ON", True, (0,0,0))
+    bPLUSon = font1.render("Button + ON", True, (0,0,0))
     bPLUSoff = font1.render("Button + OFF", True, (0,0,0))
     # L JOY
     bL_JOYon = font1.render("Button L JOY ON", True, (0,0,0))
@@ -60,7 +64,7 @@ def main():
     bRoff = font1.render("Button R OFF", True, (0,0,0))
     # UP
     bUPon = font1.render("Button UP ON", True, (0,0,0))
-    bUPOff = font1.render("Button UP OFF", True, (0,0,0))
+    bUPoff = font1.render("Button UP OFF", True, (0,0,0))
     # DOWN
     bDOWNon = font1.render("Button DOWN ON", True, (0,0,0))
     bDOWNoff = font1.render("Button DOWN OFF", True, (0,0,0))
@@ -82,9 +86,7 @@ def main():
     while True:
         screen.fill((242,244,246,1))
         screen.blit(bg, rect_bg)
-        # pygame.draw.rect(screen, (255,0,0), (20,350,200,40))
-        
-        
+        button.button_status(screen, text_start1, text_start2, text_start3, text_top)
         # イベントの取得
         for e in pygame.event.get():
             # 終了ボタン
@@ -92,23 +94,89 @@ def main():
                 active = False
 
             # ジョイスティックのボタンの入力
-            elif e.type == pygame.JOYAXISMOTION:
-                        if abs((joystick.get_axis(0))) >= sensitivity or abs((joystick.get_axis(1))) >= sensitivity:
-                            print("左スティック座標")
-                            print("("+str(joystick.get_axis(0))+","+ str(joystick.get_axis(1))+")")
-                            time.sleep(0.1)
-                        elif abs((joystick.get_axis(2))) >= sensitivity or abs((joystick.get_axis(3))) >= sensitivity:
-                            print("右スティック座標")
-                            print("("+str(joystick.get_axis(2))+","+ str(joystick.get_axis(3))+")")
-                            time.sleep(0.1)
+
+            # elif e.type == pygame.JOYAXISMOTION:
+            #             if abs((joystick.get_axis(0))) >= sensitivity or abs((joystick.get_axis(1))) >= sensitivity:
+            #                 print("左スティック座標")
+            #                 print("("+str(joystick.get_axis(0))+","+ str(joystick.get_axis(1))+")")
+            #                 time.sleep(0.1)
+            #             elif abs((joystick.get_axis(2))) >= sensitivity or abs((joystick.get_axis(3))) >= sensitivity:
+            #                 print("右スティック座標")
+            #                 print("("+str(joystick.get_axis(2))+","+ str(joystick.get_axis(3))+")")
+            #                 time.sleep(0.1)
             elif e.type == pygame.locals.JOYBUTTONDOWN:
-                    #  pygame.draw.rect(screen, (255,0,0), (20,350,200,40))
-                    screen.blit(bAon, (20, 350))
-                    pygame.display.update()
+                #A
+                if joystick.get_button(0): 
+                    screen.fill((30,227,207,1), (text_start1,text_top,150,20))
+                    screen.blit(bAon, (text_start1, text_top))
+                #B
+                elif joystick.get_button(1):
+                    screen.fill((30,227,207,1), (text_start1,text_top + 20,150,20))
+                    screen.blit(bBon, (text_start1, text_top + 20))
+                #X
+                elif joystick.get_button(2):
+                    screen.fill((30,227,207,1), (text_start1,text_top + 40,150,20))
+                    screen.blit(bXon, (text_start1, text_top + 40))
+                #Y
+                elif joystick.get_button(3):
+                    screen.fill((30,227,207,1), (text_start1,text_top + 60,150,20))
+                    screen.blit(bYon, (text_start1, text_top + 60))
+                #-
+                elif joystick.get_button(4):
+                    screen.fill((30,227,207,1), (text_start1,text_top + 80,150,20))
+                    screen.blit(bMINUSon, (text_start1, text_top + 80))
+                #HOME
+                elif joystick.get_button(5):
+                    screen.fill((30,227,207,1), (text_start1,text_top + 100,150,20))
+                    screen.blit(bHOMEon, (text_start1, text_top + 100))
+
+                #+
+                elif joystick.get_button(6):
+                    screen.fill((30,227,207,1), (text_start2,text_top,150,20))
+                    screen.blit(bPLUSon, (text_start2, text_top))
+                #L JOY
+                elif joystick.get_button(7):
+                    screen.fill((30,227,207,1), (text_start2,text_top + 20,150,20))
+                    screen.blit(bL_JOYon, (text_start2, text_top + 20))
+                #R JOY
+                elif joystick.get_button(8):
+                    screen.fill((30,227,207,1), (text_start2,text_top + 40,150,20))
+                    screen.blit(bR_JOYon, (text_start2, text_top + 40))
+                #L
+                elif joystick.get_button(9):
+                    screen.fill((30,227,207,1), (text_start2,text_top + 60,150,20))
+                    screen.blit(bLon, (text_start2, text_top + 60))
+                #R
+                elif joystick.get_button(10):
+                    screen.fill((30,227,207,1), (text_start2,text_top + 80,150,20))
+                    screen.blit(bRon, (text_start2, text_top + 80))
+                #UP
+                elif joystick.get_button(11):
+                    screen.fill((30,227,207,1), (text_start2,text_top + 100,150,20))
+                    screen.blit(bUPon, (text_start2, text_top + 100))
+                #DOWN
+                elif joystick.get_button(12):
+                    screen.fill((30,227,207,1), (text_start3,text_top,150,20))
+                    screen.blit(bDOWNon, (text_start3, text_top))
+                #LEFT
+                elif joystick.get_button(13):
+                    screen.fill((30,227,207,1), (text_start3,text_top + 20,150,20))
+                    screen.blit(bLEFTon, (text_start3, text_top + 20))
+                #RIGHT
+                elif joystick.get_button(14):
+                    screen.fill((30,227,207,1), (text_start3,text_top + 40,150,20))
+                    screen.blit(bRIGHTon, (text_start3, text_top + 40))
+                #SHOT
+                elif joystick.get_button(15):
+                    screen.fill((30,227,207,1), (text_start3,text_top + 60,150,20))
+                    screen.blit(bSHOTon, (text_start3, text_top + 60))
+                pygame.display.update()
             elif e.type == pygame.locals.JOYBUTTONUP:
-                    #  pygame.draw.rect(screen, (255,0,0), (20,350,200,40))
-                    screen.blit(bAoff, (20, 350))
-                    pygame.display.update()
+                if joystick.get_button(0): 
+                    screen.blit(bAoff, (text_start1, text_top))
+                elif joystick.get_button(1):
+                    screen.blit(bBoff, (text_start1, text_top + 20))
+                pygame.display.update()
         
 
 if __name__=="__main__":
