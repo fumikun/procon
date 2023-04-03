@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import time
+import sys
 from Python import input_status_button as button
 
 def main():
@@ -31,16 +32,16 @@ def main():
     pygame.display.set_caption('Nintendo Switch Pro Controller')
     bg = pygame.image.load("img/procon.png").convert_alpha()
     rect_bg = bg.get_rect()
-    
+
     while True:
         screen.fill((242,244,246,1))
         screen.blit(bg, rect_bg)
         button.Button_status(screen, text_start1, text_start2, text_start3, text_top)
         # イベントの取得
         for e in pygame.event.get():
-            # 終了ボタン
             if e.type == QUIT:
-                active = False
+                pygame.quit()
+                sys.exit()
 
             # ジョイスティックのボタンの入力
 
