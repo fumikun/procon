@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 import time
 
-def Button_status(screen, t1, t2, t3, tt):
+def Button_status_reset(screen, t1, t2, t3, tt):
     font1 =pygame.font.SysFont("arial", 20) # フォント設定 
     # A
     bAoff = font1.render("Button A OFF", True, (0,0,0))
@@ -23,7 +23,7 @@ def Button_status(screen, t1, t2, t3, tt):
     # R JOY
     bR_JOYoff = font1.render("Button R JOY OFF", True, (0,0,0))
     # L
-    bLoff = font1.render("Button R OFF", True, (0,0,0))
+    bLoff = font1.render("Button L OFF", True, (0,0,0))
     # R
     bRoff = font1.render("Button R OFF", True, (0,0,0))
     # UP
