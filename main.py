@@ -36,6 +36,8 @@ def main():
     while True:
         screen.fill((242,244,246,1))
         screen.blit(bg, rect_bg)
+        pygame.draw.ellipse(screen, (0, 0, 0), (500, 125, 250, 250), 5)
+        pygame.draw.ellipse(screen, (0, 0, 0), (750, 125, 250, 250), 5)
         button.Button_status(screen, text_start1, text_start2, text_start3, text_top)
         # イベントの取得
         for e in pygame.event.get():
@@ -45,15 +47,15 @@ def main():
 
             # ジョイスティックのボタンの入力
 
-            # elif e.type == pygame.JOYAXISMOTION:
-            #             if abs((joystick.get_axis(0))) >= sensitivity or abs((joystick.get_axis(1))) >= sensitivity:
-            #                 print("左スティック座標")
-            #                 print("("+str(joystick.get_axis(0))+","+ str(joystick.get_axis(1))+")")
-            #                 time.sleep(0.1)
-            #             elif abs((joystick.get_axis(2))) >= sensitivity or abs((joystick.get_axis(3))) >= sensitivity:
-            #                 print("右スティック座標")
-            #                 print("("+str(joystick.get_axis(2))+","+ str(joystick.get_axis(3))+")")
-            #                 time.sleep(0.1)
+            elif e.type == pygame.JOYAXISMOTION:
+                        if abs((joystick.get_axis(0))) >= sensitivity or abs((joystick.get_axis(1))) >= sensitivity:
+                            # print("("+str(joystick.get_axis(0))+","+ str(joystick.get_axis(1))+")")
+                            pygame.draw.ellipse(screen, (0,100,0), (625 + joystick.get_axis(0) * 125, 250 + joystick.get_axis(1) * 125, 50, 50))
+                            pygame.display.update()
+                        elif abs((joystick.get_axis(2))) >= sensitivity or abs((joystick.get_axis(3))) >= sensitivity:
+                            # print("("+str(joystick.get_axis(2))+","+ str(joystick.get_axis(3))+")")
+                            pygame.draw.ellipse(screen, (0,100,0), (875, 250, 50, 50))
+                            pygame.display.update()
             elif e.type == pygame.locals.JOYBUTTONDOWN:
                 button.button_status_show_on(joystick, screen, accent_color, text_start1, text_start2, text_start3, text_top)
                 pygame.display.update()
