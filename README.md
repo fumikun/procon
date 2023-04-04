@@ -1,4 +1,10 @@
-# procon
+# Procon
+
+## About
+
+ProconはNintendo Switch Pro コントローラーの操作を取得することができます。
+以下のデータは取得できません。
+ZL,ZR,NFC,ジャイロ
 
 # Third Party License
 
